@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ClientImage } from "@/components/client-image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Trash2, ShoppingCart, ArrowLeft } from "lucide-react";
 import { useWishlist } from "@/hooks/use-wishlist";
@@ -76,11 +77,11 @@ export default function WishlistPage() {
                   <div className="rounded-2xl border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     {/* Image */}
                     <div className="aspect-square bg-muted overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <ClientImage
                         src={item.thumbnail}
                         alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        productId={item.id}
+                        className="transition-transform duration-500 group-hover:scale-105"
                       />
                       {item.discountPercentage > 0 && (
                         <Badge className="absolute top-3 left-3 bg-rose-500 hover:bg-rose-500">

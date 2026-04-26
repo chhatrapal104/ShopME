@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ClientImage } from "@/components/client-image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, ShoppingBag, ArrowLeft, Minus, Plus, ArrowRight } from "lucide-react";
 import { useCart } from "@/hooks/use-cart";
@@ -65,8 +66,7 @@ export default function CartPage() {
                 >
                   <Link href={`/products/${item.id}`}>
                     <div className="h-20 w-20 rounded-lg overflow-hidden bg-muted shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
+                      <ClientImage src={item.thumbnail} alt={item.title} productId={item.id} />
                     </div>
                   </Link>
 

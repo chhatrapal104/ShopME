@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { ClientImage } from "@/components/client-image";
 import { Star, ShieldCheck, Truck, RotateCcw, Package, BadgePercent } from "lucide-react";
 import { fetchProductById, fetchRelatedProducts, getDiscountedPrice } from "@/lib/api";
 import { formatPrice, capitalize } from "@/lib/utils";
@@ -47,11 +48,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {/* Image Gallery */}
         <div className="space-y-3">
           <div className="relative aspect-square rounded-2xl overflow-hidden border bg-muted">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <ClientImage
               src={product.images[0] ?? product.thumbnail}
               alt={product.title}
-              className="w-full h-full object-cover"
+              productId={product.id}
             />
             {product.discountPercentage > 0 && (
               <div className="absolute top-4 left-4">
@@ -67,9 +67,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {product.images.length > 1 && (
             <div className="grid grid-cols-4 gap-2">
               {product.images.slice(0, 4).map((img, i) => (
-                <div key={i} className="relative aspect-square rounded-lg overflow-hidden border bg-muted">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt={`${product.title} view ${i + 1}`} className="w-full h-full object-cover" />
+                <div key={i} className="aspect-square rounded-lg overflow-hidden border bg-muted">
+                  <ClientImage src={img} alt={`${product.title} view ${i + 1}`} productId={product.id + i} />
                 </div>
               ))}
             </div>

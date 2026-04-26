@@ -7,6 +7,7 @@ import { useCart } from "@/hooks/use-cart";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { formatPrice, capitalize } from "@/lib/utils";
 import { getDiscountedPrice } from "@/lib/api";
+import { ClientImage } from "@/components/client-image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -60,11 +61,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
         <div className="rounded-2xl border bg-card overflow-hidden hover:shadow-lg hover:shadow-primary/5 transition-shadow duration-300">
           {/* Image Container */}
           <div className="relative w-full h-[260px] bg-muted overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <ClientImage
               src={product.thumbnail}
               alt={product.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              productId={product.id}
+              className="transition-transform duration-500 group-hover:scale-110"
             />
 
             {/* Discount Badge */}
