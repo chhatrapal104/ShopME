@@ -23,7 +23,7 @@ export function Select({
   );
 }
 
-// Trigger (NOW accepts className)
+// Trigger
 export function SelectTrigger({
   children,
   className = "",
@@ -52,13 +52,19 @@ export function SelectContent({
   return <>{children}</>;
 }
 
-// Item
+// ✅ FIXED Item (NOW supports className)
 export function SelectItem({
   value,
   children,
+  className = "",
 }: {
   value: string;
   children: React.ReactNode;
+  className?: string;
 }) {
-  return <option value={value}>{children}</option>;
+  return (
+    <option value={value} className={className}>
+      {children}
+    </option>
+  );
 }
