@@ -1,11 +1,11 @@
 {/* Image Container */}
-<div className="relative w-full h-64 bg-muted overflow-hidden">
+<div className="relative w-full h-[260px] bg-muted overflow-hidden rounded-t-xl">
   <Image
     src={product.thumbnail}
     alt={product.title}
-    fill
-    className="object-cover transition-transform duration-500 group-hover:scale-110"
-    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+    width={500}
+    height={500}
+    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
   />
 
   {/* Discount Badge */}
