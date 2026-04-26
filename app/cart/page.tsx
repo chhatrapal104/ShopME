@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, ShoppingBag, ArrowLeft, Minus, Plus, ArrowRight } from "lucide-react";
@@ -65,8 +64,9 @@ export default function CartPage() {
                   className="flex items-center gap-4 p-4 rounded-xl border bg-card"
                 >
                   <Link href={`/products/${item.id}`}>
-                    <div className="relative h-20 w-20 rounded-lg overflow-hidden bg-muted shrink-0">
-                      <Image src={item.thumbnail} alt={item.title} fill className="object-cover" />
+                    <div className="h-20 w-20 rounded-lg overflow-hidden bg-muted shrink-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
                     </div>
                   </Link>
 

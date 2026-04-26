@@ -2,6 +2,26 @@ import { Product, ProductsResponse } from "@/types";
 
 const BASE_URL = "https://dummyjson.com";
 
+// ─── Reliable image URLs via picsum.photos ────────────────────────────────────
+// DummyJSON's CDN (cdn.dummyjson.com / i.dummyjson.com) is unreliable on Vercel.
+// We replace every product's images with picsum.photos seeded by product ID so
+// each product always gets the same image, consistently, on every environment.
+function getReliableImage(productId: number, variant = 0): string {
+  return `https://picsum.photos/seed/sw-${productId}-${variant}/400/400`;
+}
+
+function enhanceProduct(product: Product): Product {
+  return {
+    ...product,
+    thumbnail: getReliableImage(product.id),
+    images: Array.from({ length: 4 }, (_, i) => getReliableImage(product.id, i)),
+  };
+}
+
+function enhanceProducts(products: Product[]): Product[] {
+  return products.map(enhanceProduct);
+}
+
 // ─── Products ─────────────────────────────────────────────────────────────────
 
 export async function fetchProducts(params?: {
@@ -24,7 +44,8 @@ export async function fetchProducts(params?: {
 
   const res = await fetch(url, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error("Failed to fetch products");
-  return res.json();
+  const data: ProductsResponse = await res.json();
+  return { ...data, products: enhanceProducts(data.products) };
 }
 
 export async function fetchProductById(id: number): Promise<Product> {
@@ -32,7 +53,8 @@ export async function fetchProductById(id: number): Promise<Product> {
     next: { revalidate: 60 },
   });
   if (!res.ok) throw new Error("Product not found");
-  return res.json();
+  const product: Product = await res.json();
+  return enhanceProduct(product);
 }
 
 export async function fetchCategories(): Promise<string[]> {
@@ -49,7 +71,7 @@ export async function fetchFeaturedProducts(): Promise<Product[]> {
   });
   if (!res.ok) throw new Error("Failed to fetch featured products");
   const data: ProductsResponse = await res.json();
-  return data.products;
+  return enhanceProducts(data.products);
 }
 
 export async function fetchRelatedProducts(category: string, excludeId: number): Promise<Product[]> {

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Trash2, ShoppingCart, ArrowLeft } from "lucide-react";
@@ -76,13 +75,12 @@ export default function WishlistPage() {
                 <Link href={`/products/${item.id}`} className="block group">
                   <div className="rounded-2xl border bg-card overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     {/* Image */}
-                    <div className="relative aspect-square bg-muted overflow-hidden">
-                      <Image
+                    <div className="aspect-square bg-muted overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         src={item.thumbnail}
                         alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 640px) 100vw, 25vw"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       {item.discountPercentage > 0 && (
                         <Badge className="absolute top-3 left-3 bg-rose-500 hover:bg-rose-500">

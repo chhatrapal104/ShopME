@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Zap, Star, ShieldCheck, Truck } from "lucide-react";
 import { fetchFeaturedProducts, fetchCategories, getDiscountedPrice } from "@/lib/api";
 import { ProductCard } from "@/components/product-card";
