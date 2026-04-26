@@ -23,16 +23,18 @@ export function Select({
   );
 }
 
-// Trigger (wrapper only)
+// Trigger (NOW accepts className)
 export function SelectTrigger({
   children,
+  className = "",
 }: {
   children: React.ReactNode;
+  className?: string;
 }) {
-  return <>{children}</>;
+  return <div className={className}>{children}</div>;
 }
 
-// Value (placeholder support)
+// Value
 export function SelectValue({
   placeholder,
 }: {
@@ -41,7 +43,7 @@ export function SelectValue({
   return <option value="">{placeholder || "Select..."}</option>;
 }
 
-// Content (wrapper)
+// Content
 export function SelectContent({
   children,
 }: {
@@ -50,7 +52,7 @@ export function SelectContent({
   return <>{children}</>;
 }
 
-// Item (actual option)
+// Item
 export function SelectItem({
   value,
   children,
